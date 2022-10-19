@@ -53,6 +53,15 @@ function palindroma(parola) {
     return;
   }
 
+  // se parola è di un carattere scrivi una parola
+  if(parola.length == 1) {
+    output.innerText = 'Devi scrivere una parola con più di una lettera';
+    // resetto l'input
+    resetInput(input);
+    // esco
+    return;
+  }
+
   // se la parola inserita è un numero chiedo di inserire una parola
   if(!isNaN(parola)) {
     output.innerText = 'Devi inserire una parola non un numero';
