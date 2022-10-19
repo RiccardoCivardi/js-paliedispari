@@ -31,6 +31,7 @@ button.addEventListener('click', function(){
 // al click sul bottone reset cancello in campo di input
 button2.addEventListener('click', function(){
   resetInput(input);
+  resetOutput(output);
 });
 
 // funzione palindroma
@@ -42,6 +43,15 @@ function palindroma(parola) {
 
   // rendo la parola in maiuscolo così escludo lettere o maiuscole o minuscole
   parola = parola.toUpperCase();
+
+  // se campo vuoto scrivo di inserire una parola
+  if(parola === '') {
+    output.innerText = 'Devi scrivere una parola';
+    // resetto l'input
+    resetInput(input);
+    // esco
+    return;
+  }
 
   // se la parola inserita è un numero chiedo di inserire una parola
   if(!isNaN(parola)) {
@@ -86,6 +96,12 @@ function resetInput(element){
   return element;
 }
 
+//funzione resetOutput che cancella l'output
+function resetOutput(el) {
+  el.innerText = '';
+  return el;
+}
+
 /* ------------------------------------ */
 
 // PARI E DISPARI
@@ -109,6 +125,7 @@ button3.addEventListener('click', giocoPariDispari)
 button4.addEventListener('click', function(){
   resetInput(pariDispariUser);
   resetInput(numberUser);
+  resetOutput(output2);
 });
 
 function giocoPariDispari (){
