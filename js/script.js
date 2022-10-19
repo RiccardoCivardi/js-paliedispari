@@ -18,7 +18,7 @@ Dichiariamo chi ha vinto.
 const input = document.querySelector('#word');
 //prendo il bottone Verifica
 const button = document.querySelector('#palindroma button');
-//prendo il bottone Verifica
+//prendo il bottone reset
 const button2 = document.querySelector('#palindroma #reset');
 // prendo l'output h3
 const output = document.querySelector('#palindroma h3');
@@ -40,10 +40,15 @@ function palindroma(parola) {
   parola = parola.trimEnd();
   parola = parola.trimStart();
 
+  // rendo la parola in maiuscolo così escludo lettere o maiuscole o minuscole
+  parola = parola.toUpperCase();
+
   // se la parola inserita è un numero chiedo di inserire una parola
   if(!isNaN(parola)) {
     output.innerText = 'Devi inserire una parola non un numero';
-    // quindi esco
+    // resetto l'input
+    resetInput(input);
+    // esco
     return;
   } 
   
@@ -57,7 +62,7 @@ function palindroma(parola) {
 }
 
 // funzione invertiParola a cui passo una parola e me la restituisce invertita
-function invertiParola(parola) {
+function invertiParola (parola) {
   // dichiaro la variabile in cui creerò la parola invertita
   let parolaInversa = '';
   //ciclo al contrario la parola.lenght-1 per costruire la parola invertita  
@@ -80,3 +85,70 @@ function resetInput(element){
   element.value = '';
   return element;
 }
+
+/* ------------------------------------ */
+
+// PARI E DISPARI
+
+// prendo la select di pari o dispari
+const pariDispariUser = document.querySelector('[name="par-dispari"]');
+// prendo il numero inserito
+const numberUser = document.querySelector('#pari-dispari input');
+// prendo il bottone via 
+const button3 = document.querySelector('#pari-dispari button');
+//prendo il bottone reset
+const button4 = document.querySelector('#pari-dispari #reset');
+// prendo l'output h3
+const output2 = document.querySelector('#pari-dispari h3');
+
+
+// al click sul bottone parte la funzione
+button3.addEventListener('click', giocoPariDispari)
+
+// al click sul bottone reset cancello i campi di input
+button4.addEventListener('click', function(){
+  resetInput(pariDispariUser);
+  resetInput(numberUser);
+});
+
+function giocoPariDispari (){
+  //numero giocatore
+  const numUser = parseInt(numberUser.value);
+  
+  // controllo se il numero non è compreso tra 1 e 5
+  if(numUser < 1 || numUser > 5) {
+    // scrivo il messaggio di errore in output2
+    output2.innerText = 'Devi inserire un numero compreso tra 1 e 5';
+    // resetto l'input
+    resetInput(numberUser);
+    // esco
+    return;
+  }
+ 
+   // genero il numero casuale del computer
+   const numComputer = random(1, 5);
+   // genero la somma
+   const sumNumbers = sum(numUser, numComputer);
+   // controllo se la somma è pari o dispari e stampo output
+   if (pariDispariUser.value === PariDispari(sumNumbers)) output2.innerText = 'Vince l\'utente';
+   else output2.innerText = 'Vince il computer';
+}
+
+// estrattore casuale
+function random (min, max) {
+  return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
+// funzione somma
+function sum (num1, num2) {
+  // ritorna la somma dei due numeri
+  return somma = num1 + num2;
+}
+
+//funzione pari o dispari
+function PariDispari (num) {
+  if(num % 2) return "dispari";
+  else return "pari";
+}
+
+
